@@ -22,7 +22,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.paddingFromBaseline
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,10 +89,47 @@ fun SearchBar(
     )
 }
 
+@Composable
+fun AlignYourBodyElement(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(88.dp)
+                .clip(CircleShape)
+        )
+        Text(
+            text = stringResource(text),
+            modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Modul12Theme {
         Greeting("Android")
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+@Composable
+fun AlignYourBodyElementPreview() {
+    Modul12Theme {
+        AlignYourBodyElement(
+            text = R.string.ab1_inversions,
+            drawable = R.drawable.pat,
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }
