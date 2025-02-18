@@ -37,6 +37,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.paddingFromBaseline
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Surface
+import androidx.compose.foundation.layout.width
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,11 +117,52 @@ fun AlignYourBodyElement(
         )
     }
 }
+
+@Composable
+fun FavoriteCollectionCard(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.width(255.dp)
+        ) {
+            Image(
+                painter = painterResource(drawable),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(80.dp)
+            )
+            Text(
+                text = stringResource(text),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp)
+            )
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Modul12Theme {
         Greeting("Android")
+    }
+}
+
+@Preview
+@Composable
+fun SearchBarPreview() {
+    Modul12Theme {
+        SearchBar()
     }
 }
 
@@ -128,6 +172,18 @@ fun AlignYourBodyElementPreview() {
     Modul12Theme {
         AlignYourBodyElement(
             text = R.string.ab1_inversions,
+            drawable = R.drawable.pat,
+            modifier = Modifier.padding(8.dp)
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
+@Composable
+fun FavoriteCollectionCardPreview() {
+    Modul12Theme {
+        FavoriteCollectionCard(
+            text = R.string.pat,
             drawable = R.drawable.pat,
             modifier = Modifier.padding(8.dp)
         )
